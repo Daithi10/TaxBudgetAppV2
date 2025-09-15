@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Irish Tax Calculator{% endblock %}
+
+{% block content %}
+<h1>Irish Tax Calculator</h1>
+<form action="/tax" method="post" class="form-container">
+    <label for="salary">Annual Salary (€):</label>
+    <input type="number" id="salary" name="salary" required>
+
+    <label for="marital_status">Marital Status:</label>
+    <select id="marital_status" name="marital_status" required>
+        <option value="">-- Select --</option>
+        <option value="single">Single</option>
+        <option value="married">Married</option>
+    </select>
+
+    <label for="children_count">Number of Children:</label>
+<input type="number" id="children_count" name="children_count" value="0" min="0" required>
+
+    <label for="age_group">Age Group:</label>
+    <select id="age_group" name="age_group" required>
+        <option value="">-- Select --</option>
+        <option value="under_65">Under 65</option>
+        <option value="65_plus">65 and over</option>
+    </select>
+
+    <label for="employment_type">Employment Type:</label>
+    <select id="employment_type" name="employment_type" required>
+        <option value="">-- Select --</option>
+        <option value="paye">PAYE</option>
+        <option value="self_employed">Self-Employed</option>
+    </select>
+
+    <label for="tax_credits">Other Tax Credits (€):</label>
+    <input type="number" id="tax_credits" name="tax_credits" value="0">
+
+    <button type="submit">Calculate Tax</button>
+</form>
+
+{% if result is not none %}
+  <div class="result-box">
+    <h3>Tax Calculation Result</h3>
+    <p>Gross Annual Salary: €{{ salary }}</p>
+    <p><strong>Total Tax Payable: €{{ result }}</strong></p>
+
+    {% if breakdown %}
+    <table class="breakdown-table">
+      <thead>
+        <tr>
+          <th>Tax Band</th>
+          <th>Amount (€)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for band, amount in breakdown.items() %}
+        <tr>
+          <td>{{ band }}</td>
+          <td>{{ amount }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+  </div>
+{% endif %}
+
+<p><a href="/">← Back to Home</a></p>
+{% endblock %}

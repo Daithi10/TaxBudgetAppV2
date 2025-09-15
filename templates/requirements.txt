@@ -1,0 +1,20 @@
+# Core framework
+flask==3.0.3
+
+# Database ORM for Flask
+flask_sqlalchemy==3.1.1
+
+# PostgreSQL adapter (binary version for easy install)
+psycopg2-binary==2.9.9
+
+# Flask migrations (helps update DB schema without losing data)
+flask-migrate==4.0.5
+
+# Forms & CSRF protection
+flask-wtf==1.2.1
+
+# Environment variables management
+python-dotenv==1.0.1
+
+# Optional: Password hashing for login/register
+werkzeug==3.0.3

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us - Tax & Budget App{% endblock %}
+
+{% block content %}
+<section class="contact-section">
+    <h2>Contact Us</h2>
+    <form method="POST" action="/contact" class="contact-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button type="submit">Send Message</button>
+    </form>
+
+    <div class="social-contact">
+        <p>Alternatively, you can reach us via social media:</p>
+        <ul class="social-links">
+            <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+            <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+            <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+            <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+        </ul>
+    </div>
+</section>
+{% endblock %}

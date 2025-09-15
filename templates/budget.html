@@ -1,0 +1,64 @@
+<!-- budget.html -->
+{% extends "base.html" %}
+{% block content %}
+  <div class="container">
+    <h2>Monthly Budget Tracker</h2>
+
+    {% if username %}
+      <p>Welcome, {{ username }} | <a href="{{ url_for('logout') }}">Logout</a></p>
+    {% endif %}
+
+    <form method="post">
+      <label for="income">Monthly Income (€):</label>
+      <input type="number" step="0.01" name="income" required>
+
+      <label for="rent">Rent (€):</label>
+      <input type="number" step="0.01" name="rent" required>
+
+      <label for="groceries">Groceries (€):</label>
+      <input type="number" step="0.01" name="groceries" required>
+
+      <label for="transport">Transport (€):</label>
+      <input type="number" step="0.01" name="transport" required>
+
+      <label for="utilities">Utilities (€):</label>
+      <input type="number" step="0.01" name="utilities" required>
+
+      <label for="other">Other Expenses (€):</label>
+      <input type="number" step="0.01" name="other" required>
+
+      <button type="submit">Calculate</button>
+    </form>
+
+    {% if residual_income is not none %}
+      <div class="result">
+        <h3>Budget Summary{% if username %} for {{ username }}{% endif %}</h3>
+        <p><strong>Residual Income:</strong> €{{ residual_income }}</p>
+
+        <form action="{{ url_for('budget') }}" method="post">
+          <label for="savings">What percentage of this would you like to save?</label>
+          <input type="number" name="savings" min="0" max="100" required>
+          <input type="hidden" name="residual_income" value="{{ residual_income }}">
+          <button type="submit">Calculate Savings</button>
+          <input type="hidden" name="action" value="save">
+          <button type="submit">Save Budget</button>
+        </form>
+      </div>
+    {% endif %}
+
+    {% if savings_amount is not none %}
+      <div class="result">
+        <h4>You chose to save {{ savings_percent }}% of your residual income.</h4>
+        <p>That means €{{ savings_amount }} will go into savings monthly.</p>
+      </div>
+    {% endif %}
+
+    {% if residual_income is not none and not session.get('username') %}
+      <div class="signup-prompt">
+        <h4>Want to track your savings progress?</h4>
+        <p>Register to save your budget history and monitor your goals over time.</p>
+        <a href="{{ url_for('register') }}" class="btn">Register now</a>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}
