@@ -18,3 +18,4 @@ python-dotenv==1.0.1
 
 # Optional: Password hashing for login/register
 werkzeug==3.0.3
+flask-mail

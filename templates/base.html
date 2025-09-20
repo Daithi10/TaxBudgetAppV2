@@ -4,18 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Tax & Budget App{% endblock %}</title>
+    <title>{% block title %}Tax &amp; Budget App{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <!-- Navigation Bar -->
-    <nav>
-        <ul>
+    <nav class="navbar">
+        <div class="logo">TaxBudgetApp</div>
+
+        <!-- Hamburger for mobile -->
+        <div class="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <ul id="nav-links">
             <li><a href="{{ url_for('home') }}">Home</a></li>
             <li><a href="{{ url_for('budget') }}">Budget</a></li>
             <li><a href="{{ url_for('tax') }}">Tax</a></li>
-            <li><a href="{{ url_for('saved_budget') }}">Saved Budgets</a></li>
-            <li><a href="{{ url_for('contacts') }}">Contact</a></li>
+            <li><a href="{{ url_for('saved_budgets') }}">Saved Budgets</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
             {% if session.get('user_id') %}
                 <li><a href="{{ url_for('logout') }}">Logout ({{ session.get('username') }})</a></li>
             {% else %}
@@ -45,7 +54,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Your Name. All rights reserved.</p>
+        <p>&copy; 2025 Ri Daithi. All rights reserved.</p>
     </footer>
 
     <!-- JavaScript -->

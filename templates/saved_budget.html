@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Saved Budgets{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Saved Budgets</h2>
+
+    {% if session.get('username') %}
+        <p>Welcome, {{ session.get('username') }} | <a href="{{ url_for('logout') }}">Logout</a></p>
+
+        {% if budgets %}
+            <table class="saved-budget-table">
+                <thead>
+                    <tr>
+                        <th>Budget Name</th>
+                        <th>Income (€)</th>
+                        <th>Rent (€)</th>
+                        <th>Groceries (€)</th>
+                        <th>Transport (€)</th>
+                        <th>Utilities (€)</th>
+                        <th>Other (€)</th>
+                        <th>Savings %</th>
+                        <th>Savings Amount (€)</th>
+                        <th>Created At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for budget in budgets %}
+                    <tr>
+                        <td>{{ budget.budget_name }}</td>
+                        <td>{{ budget.income }}</td>
+                        <td>{{ budget.rent }}</td>
+                        <td>{{ budget.groceries }}</td>
+                        <td>{{ budget.transport }}</td>
+                        <td>{{ budget.utilities }}</td>
+                        <td>{{ budget.other }}</td>
+                        <td>{{ budget.savings_percent or 0 }}</td>
+                        <td>{{ budget.savings_amount or 0 }}</td>
+                        <td>{{ budget.created_at.strftime("%Y-%m-%d %H:%M") }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>You have no saved budgets yet. <a href="{{ url_for('budget') }}">Create one now</a>.</p>
+        {% endif %}
+    {% else %}
+        <p>Please <a href="{{ url_for('login') }}">log in</a> to view your saved budgets.</p>
+    {% endif %}
+</div>
+{% endblock %}
+

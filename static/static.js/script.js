@@ -1,6 +1,24 @@
 document.addEventListener('DOMContentLoaded', function () {
   console.log("JavaScript is connected");
 
+  document.addEventListener('DOMContentLoaded', function () {
+  console.log("JavaScript is connected");
+
+  // === 1. Hamburger menu toggle ===
+  // ... existing code ...
+
+  // === 5. Contact form validation ===
+  // ... existing code ...
+
+  // === 6. Highlight active nav link ===
+  const currentPath = window.location.pathname;
+  document.querySelectorAll('.navbar ul li a').forEach(link => {
+    if (link.getAttribute('href') === currentPath) {
+      link.classList.add('active-link');
+    }
+  });
+});
+
   // === 1. Hamburger menu toggle ===
   const hamburger = document.querySelector('.hamburger');
   const menu = document.querySelector('.navbar ul');
